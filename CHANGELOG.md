@@ -1,3 +1,5 @@
-## [0.0.1] - TODO: Add release date.
-
-* TODO: Describe initial release.
+## [0.2.1] - Initial Release: 2020-08-14.
+* Added support of: 
+    * Youtube
+    * Instagram 
+    * Twitter
