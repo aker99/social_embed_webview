@@ -1,3 +1,5 @@
+## [0.2.3.5] - Minor Documenation Edit: 2020-08-14.
+
 ## [0.2.3] - Platfrom Added: 2020-08-14.
 * Added support of:
     * Facebook Post
