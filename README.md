@@ -39,7 +39,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 ## Example
 Please make sure to remove `<script>...</script>` added by the platform with other embed code.
-Please visit [Github](https://github.com/aker99/social_embed_webview/blob/master/example/lib/main.dart) / [Pub.dev-Example](https://pub.dev/packages/webview_flutter_plus/example) for more detailed examples corresponding to each platform
+Please visit [Github](https://github.com/aker99/social_embed_webview/blob/master/example/lib/main.dart) / [Pub.dev-Example](https://pub.dev/packages/social_embed_webview/example) for more detailed examples corresponding to each platform
 ```
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
