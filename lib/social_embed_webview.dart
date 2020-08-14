@@ -105,10 +105,10 @@ String script = r"""
 	}
 	
 	const widget = document.getElementById('widget');
-  PageHeight.postMessage(widget.clientHeight + 15);
+  PageHeight.postMessage(widget.clientHeight);
 	const interval =  elementHeightChangeListener(widget, (h) => {
-	  console.log('Body height changed:', h + 15);
-	  PageHeight.postMessage(h + 15);
+	  console.log('Body height changed:', h);
+	  PageHeight.postMessage(h);
 	});
 	setInterval(() => clearTimeout(interval),10000);
 </script>

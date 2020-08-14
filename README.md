@@ -1,5 +1,5 @@
 # Social Embed WebView (Developers Preview) 
-Currentlty non of the major social media platform provide support to embed their post in flutter app. This flutter package provides widget to embed post of various social media platform using [webview_flutter](https://pub.dev/packages/webview_flutter) in background.
+Currently non of the major social media platform provides support to embed their post in a flutter app. This flutter package provides widgets to embed posts of various social media platforms using [webview_flutter](https://pub.dev/packages/webview_flutter) in the background.
 
 ## Content
 * [Social Embed WebView](#social-embed-webView)
@@ -7,16 +7,16 @@ Currentlty non of the major social media platform provide support to embed their
 * [Supported Platforms](#supported-platforms)
 * [How to use?](#how-to-use)
 * [Examples](#example)
+* [Output](#output)
 
 ## Why Us
-They are not many solution in the community to slove this problem. All the  packages uses same [webview_flutter](https://pub.dev/packages/webview_flutter) in background but have a major issue of a *predefined height*. While this package *adjusts the heights of the webview automatically* accoording to the size of embedded post.
+They are not many solutions in the community to solve this problem. All the packages use the same [webview_flutter](https://pub.dev/packages/webview_flutter) in the background but have a major issue of a *predefined height*. While this package *adjusts the heights of the webview automatically* according to the size of the embedded post.
 
 ## Supported Platforms:
-* [Instagram](https://instagram.com/)
+* [Instagram](https://instagram.com)
 * [Twitter](https://twitter.com)
-* [Youtube](https://youtube.com/)
-
-`Facebook Support Comming Soon!!!`
+* [Youtube](https://youtube.com)
+* [Facebook](https://facebook.com)
 
 ## How to use?
 **1:** Add this to your package's pubspec.yaml file:
@@ -35,11 +35,11 @@ $ flutter packages get
 Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
 
 
-**3:** Please visit [webview_flutter](https://pub.dev/packages/webview_flutter_plus#how-to-use) and steps required for implementations in `Android` and `iOS` respectively
+**3:** Please visit [webview_flutter](https://pub.dev/packages/webview_flutter_plus#how-to-use) and follow the steps required for implementations in `Android` and `iOS` respectively.
 
 ## Example
 Please make sure to remove `<script>...</script>` added by the platform with other embed code.
-
+Please visit [Github](https://github.com/aker99/social_embed_webview/blob/master/example/lib/main.dart) / [Pub.dev-Example](https://pub.dev/packages/webview_flutter_plus/example) for more detailed examples corresponding to each platform
 ```
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
@@ -86,3 +86,10 @@ class MyApp extends StatelessWidget {
 }
 
 ```
+## Output
+
+* [Twitter](outputs/facebook_post.jpeg) 
+* [Instragram](outputs/insta.jpeg)
+* [Youtube](outputs/youtube.jpeg)  
+* [Facebook Post](outputs/facebook_post.jpeg)
+* [Facebook Video](outputs/facebook_video.jpeg)  
