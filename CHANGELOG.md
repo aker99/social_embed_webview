@@ -1,4 +1,5 @@
-## [0.2.3.5] - Minor Documenation Edit: 2020-08-14.
+## [0.2.4] - Bug Fix: 2020-08-XX.
+* Insatgram embed picture would be visible now
 
 ## [0.2.3] - Platfrom Added: 2020-08-14.
 * Added support of:

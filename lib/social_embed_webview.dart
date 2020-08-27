@@ -16,7 +16,7 @@ final Map<SocailMediaPlatforms, String> _socailMediaScripts = {
   SocailMediaPlatforms.twitter:
       '<script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
   SocailMediaPlatforms.instagram:
-      '<script async src="//www.instagram.com/embed.js"></script>',
+      '<script async src="https://www.instagram.com/embed.js"></script>',
   SocailMediaPlatforms.youtube: '',
   SocailMediaPlatforms.facebook_post:
       '<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>',
@@ -51,7 +51,7 @@ class _SocialEmbedState extends State<SocialEmbed> {
   }
 
   void _setHeight(double height) {
-    print("Height: " + height.toString());
+    //print("Height: " + height.toString());
     setState(() {
       _height = height;
     });
@@ -107,7 +107,7 @@ String script = r"""
 	const widget = document.getElementById('widget');
   PageHeight.postMessage(widget.clientHeight);
 	const interval =  elementHeightChangeListener(widget, (h) => {
-	  console.log('Body height changed:', h);
+	  //console.log('Body height changed:', h);
 	  PageHeight.postMessage(h);
 	});
 	setInterval(() => clearTimeout(interval),10000);
