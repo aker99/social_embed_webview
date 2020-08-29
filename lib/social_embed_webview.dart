@@ -3,6 +3,7 @@ library social_embed_webview;
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/utlis.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum SocailMediaPlatforms {
   twitter,
@@ -37,12 +38,35 @@ class SocialEmbed extends StatefulWidget {
 
 class _SocialEmbedState extends State<SocialEmbed> {
   double _height = 300;
+  WebViewController webViewController;
+
   @override
-  Widget build(BuildContext context) {
-    return _buildWebView(context);
+  void dispose() {
+    super.dispose();
   }
 
-  JavascriptChannel _getHeightJavascriptChannel(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
+    var wv = WebView(
+      key: ValueKey(widget.embedCode),
+      initialUrl: htmlToURI(_buildCode(context)),
+      javascriptChannels:
+          <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
+      javascriptMode: JavascriptMode.unrestricted,
+      navigationDelegate: (navigation) {
+        final url = navigation.url;
+        canLaunch(url).then((can) => (can) ? launch(url) : null);
+        return NavigationDecision.prevent;
+      },
+      onWebViewCreated: (wbc) => webViewController = wbc,
+    );
+    if (widget.type == SocailMediaPlatforms.youtube) {
+      return AspectRatio(aspectRatio: 16 / 9, child: wv);
+    }
+    return SizedBox(height: _height, child: wv);
+  }
+
+  JavascriptChannel _getHeightJavascriptChannel() {
     return JavascriptChannel(
         name: 'PageHeight',
         onMessageReceived: (JavascriptMessage message) {
@@ -52,34 +76,21 @@ class _SocialEmbedState extends State<SocialEmbed> {
 
   void _setHeight(double height) {
     //print("Height: " + height.toString());
-    setState(() {
-      _height = height;
-    });
-  }
-
-  Widget _buildWebView(BuildContext context) {
-    var wv = WebView(
-      initialUrl: htmlToURI(_buildCode(context)),
-      javascriptChannels:
-          <JavascriptChannel>[_getHeightJavascriptChannel(context)].toSet(),
-      javascriptMode: JavascriptMode.unrestricted,
-    );
-    if (widget.type == SocailMediaPlatforms.youtube) {
-      return AspectRatio(aspectRatio: 16 / 9, child: wv);
+    if (this.mounted) {
+      print('Changes triggered');
+      setState(() {
+        _height = height + 17;
+      });
     }
-    return SizedBox(
-      height: _height,
-      child: wv,
-    );
   }
 
   String _buildCode(BuildContext context) {
-    return '<div id="widget">${_parseData(context)}</div>' +
+    return '<div id="widget">${_parseData()}</div>' +
         script +
         _socailMediaScripts[widget.type];
   }
 
-  String _parseData(BuildContext context) {
+  String _parseData() {
     if (widget.type == SocailMediaPlatforms.facebook_post) {
       return '<div class="fb-post" data-href="${widget.embedCode}" data-show-text="true"></div>';
     } else if (widget.type == SocailMediaPlatforms.facebook_video) {
@@ -106,10 +117,9 @@ String script = r"""
 	
 	const widget = document.getElementById('widget');
   PageHeight.postMessage(widget.clientHeight);
-	const interval =  elementHeightChangeListener(widget, (h) => {
-	  //console.log('Body height changed:', h);
+  const interval =  elementHeightChangeListener(widget, (h) => {
 	  PageHeight.postMessage(h);
 	});
-	setInterval(() => clearTimeout(interval),10000);
+	setInterval(() => clearTimeout(interval),5000);
 </script>
     """;
