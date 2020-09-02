@@ -6,6 +6,7 @@ Currently non of the major social media platform provides support to embed their
 * [Why Us](#why-us)
 * [Supported Platforms](#supported-platforms)
 * [How to use?](#how-to-use)
+* [Contribution](https://github.com/aker99/social_embed_webview/blob/master/CONTRIBUTION.md)
 * [Examples](#example)
 * [Output](#output)
 
@@ -35,7 +36,7 @@ $ flutter packages get
 Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
 
 
-**3:** Please visit [webview_flutter](https://pub.dev/packages/webview_flutter_plus#how-to-use) and follow the steps required for implementations in `Android` and `iOS` respectively.
+**3:** Please visit [webview_flutter](https://pub.dev/packages/webview_flutter) and follow the steps required for implementations in `Android` and `iOS` respectively.
 
 ## Example
 Please make sure to remove `<script>...</script>` added by the platform with other embed code.
@@ -88,8 +89,8 @@ class MyApp extends StatelessWidget {
 ```
 ## Output
 
-* [Twitter](outputs/facebook_post.jpeg) 
-* [Instragram](outputs/insta.jpeg)
-* [Youtube](outputs/youtube.jpeg)  
-* [Facebook Post](outputs/facebook_post.jpeg)
-* [Facebook Video](outputs/facebook_video.jpeg)  
+* [Twitter](outputs/tw.jpeg) 
+* [Instragram](outputs/ig.jpeg)
+* [Youtube](outputs/yt.jpeg)  
+* [Facebook Post](outputs/fb-p.jpeg)
+* [Facebook Video](outputs/fb-v.jpeg)  

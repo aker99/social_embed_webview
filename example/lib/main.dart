@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          backgroundColor: Colors.white),
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -44,18 +44,18 @@ class MyApp extends StatelessWidget {
                     embedCode: tweetContent,
                     type: SocailMediaPlatforms.twitter,
                   ),
-                  // SocialEmbed(
-                  //     embedCode: instaContent,
-                  //     type: SocailMediaPlatforms.instagram),
-                  // SocialEmbed(
-                  //     embedCode: dataFb,
-                  //     type: SocailMediaPlatforms.facebook_video),
-                  // SocialEmbed(
-                  //   embedCode: dataFBPost,
-                  //   type: SocailMediaPlatforms.facebook_post,
-                  // ),
-                  // SocialEmbed(
-                  //     embedCode: dataYt, type: SocailMediaPlatforms.youtube),
+                  SocialEmbed(
+                      embedCode: instaContent,
+                      type: SocailMediaPlatforms.instagram),
+                  SocialEmbed(
+                      embedCode: dataFb,
+                      type: SocailMediaPlatforms.facebook_video),
+                  SocialEmbed(
+                    embedCode: dataFBPost,
+                    type: SocailMediaPlatforms.facebook_post,
+                  ),
+                  SocialEmbed(
+                      embedCode: dataYt, type: SocailMediaPlatforms.youtube),
                 ],
               ),
             ),
