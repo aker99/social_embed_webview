@@ -44,18 +44,18 @@ class MyApp extends StatelessWidget {
                     embedCode: tweetContent,
                     type: SocailMediaPlatforms.twitter,
                   ),
-                  // SocialEmbed(
-                  //     embedCode: instaContent,
-                  //     type: SocailMediaPlatforms.instagram),
-                  // SocialEmbed(
-                  //     embedCode: dataFb,
-                  //     type: SocailMediaPlatforms.facebook_video),
-                  // SocialEmbed(
-                  //   embedCode: dataFBPost,
-                  //   type: SocailMediaPlatforms.facebook_post,
-                  // ),
-                  // SocialEmbed(
-                  //     embedCode: dataYt, type: SocailMediaPlatforms.youtube),
+                  SocialEmbed(
+                      embedCode: instaContent,
+                      type: SocailMediaPlatforms.instagram),
+                  SocialEmbed(
+                      embedCode: dataFb,
+                      type: SocailMediaPlatforms.facebook_video),
+                  SocialEmbed(
+                    embedCode: dataFBPost,
+                    type: SocailMediaPlatforms.facebook_post,
+                  ),
+                  SocialEmbed(
+                      embedCode: dataYt, type: SocailMediaPlatforms.youtube),
                 ],
               ),
             ),
