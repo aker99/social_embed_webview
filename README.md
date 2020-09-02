@@ -6,6 +6,7 @@ Currently non of the major social media platform provides support to embed their
 * [Why Us](#why-us)
 * [Supported Platforms](#supported-platforms)
 * [How to use?](#how-to-use)
+* [Contribution](https://github.com/aker99/social_embed_webview/blob/master/CONTRIBUTION.md)
 * [Examples](#example)
 * [Output](#output)
 

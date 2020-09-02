@@ -28,8 +28,13 @@ final Map<SocailMediaPlatforms, String> _socailMediaScripts = {
 class SocialEmbed extends StatefulWidget {
   final String embedCode;
   final SocailMediaPlatforms type;
+  final Color backgroundColor;
 
-  const SocialEmbed({Key key, @required this.embedCode, @required this.type})
+  const SocialEmbed(
+      {Key key,
+      @required this.embedCode,
+      @required this.type,
+      this.backgroundColor})
       : super(key: key);
 
   @override
@@ -38,28 +43,19 @@ class SocialEmbed extends StatefulWidget {
 
 class _SocialEmbedState extends State<SocialEmbed> {
   double _height = 300;
-  WebViewController webViewController;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    var wv = WebView(
-      key: ValueKey(widget.embedCode),
-      initialUrl: htmlToURI(_buildCode(context)),
-      javascriptChannels:
-          <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
-      javascriptMode: JavascriptMode.unrestricted,
-      navigationDelegate: (navigation) {
-        final url = navigation.url;
-        canLaunch(url).then((can) => (can) ? launch(url) : null);
-        return NavigationDecision.prevent;
-      },
-      onWebViewCreated: (wbc) => webViewController = wbc,
-    );
+    final wv = WebView(
+        initialUrl: htmlToURI(_buildCode(context)),
+        javascriptChannels:
+            <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
+        javascriptMode: JavascriptMode.unrestricted,
+        navigationDelegate: (navigation) {
+          final url = navigation.url;
+          canLaunch(url).then((can) => (can) ? launch(url) : null);
+          return NavigationDecision.prevent;
+        });
     if (widget.type == SocailMediaPlatforms.youtube) {
       return AspectRatio(aspectRatio: 16 / 9, child: wv);
     }
@@ -75,9 +71,7 @@ class _SocialEmbedState extends State<SocialEmbed> {
   }
 
   void _setHeight(double height) {
-    //print("Height: " + height.toString());
     if (this.mounted) {
-      print('Changes triggered');
       setState(() {
         _height = height + 17;
       });
@@ -85,7 +79,7 @@ class _SocialEmbedState extends State<SocialEmbed> {
   }
 
   String _buildCode(BuildContext context) {
-    return '<div id="widget">${_parseData()}</div>' +
+    return '<body style="background-color: ${colorToHtmlRGBA(getBackgroundColor(context))}"><div id="widget">${_parseData()}</div></body>' +
         script +
         _socailMediaScripts[widget.type];
   }
@@ -99,6 +93,12 @@ class _SocialEmbedState extends State<SocialEmbed> {
       return '<iframe src="https://www.youtube.com/embed/${widget.embedCode}" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture" width=100% height=100%></iframe>';
     }
     return widget.embedCode;
+  }
+
+  Color getBackgroundColor(BuildContext context) {
+    return (widget.backgroundColor == null)
+        ? Theme.of(context).scaffoldBackgroundColor
+        : widget.backgroundColor;
   }
 }
 
@@ -120,6 +120,6 @@ String script = r"""
   const interval =  elementHeightChangeListener(widget, (h) => {
 	  PageHeight.postMessage(h);
 	});
-	setInterval(() => clearTimeout(interval),5000);
+	setInterval(() => clearTimeout(interval),10000);
 </script>
     """;
