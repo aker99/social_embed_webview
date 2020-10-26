@@ -15,7 +15,7 @@ enum SocailMediaPlatforms {
 
 final Map<SocailMediaPlatforms, String> _socailMediaScripts = {
   SocailMediaPlatforms.twitter:
-      '<script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
+      '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
   SocailMediaPlatforms.instagram:
       '<script async src="https://www.instagram.com/embed.js"></script>',
   SocailMediaPlatforms.youtube: '',
@@ -117,9 +117,16 @@ String script = r"""
 	
 	const widget = document.getElementById('widget');
   PageHeight.postMessage(widget.clientHeight);
+  let oH = widget.clientHeight;
+  let counter = 0;
   const interval =  elementHeightChangeListener(widget, (h) => {
 	  PageHeight.postMessage(h);
+    if (h == oH){
+      if (counter == 35) {
+        clearTimeout(interval);
+      } 
+      counter++;
+    } else counter = 0;
 	});
-	setInterval(() => clearTimeout(interval),10000);
 </script>
     """;
