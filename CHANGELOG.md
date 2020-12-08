@@ -1,3 +1,8 @@
+## [0.2.6] - Dependencies Verion Update: 2020-12-08
+* Dependencies Verion Update
+    * webview_flutter: *0.3.22+1* -> *1.0.7*
+    * url_launcher: *5.5.1* -> *5.7.10*
+
 ## [0.2.5] - Bug Fix: 2020-09-02.
 * Features
     * OnClick *native Open-In* option added
