@@ -32,9 +32,15 @@ class Youtube extends SocialMediaGeneric {
       function stopVideo() {
         player.stopVideo();
       }
+
+      function pauseVideo() {
+        player.pauseVideo();
+      }
     </script>
   """;
 
   @override
-  String get pauseVideoScript => "stopVideo()";
+  String get pauseVideoScript => "pauseVideo()";
+  @override
+  String get stopVideoScript => "stopVideo()";
 }

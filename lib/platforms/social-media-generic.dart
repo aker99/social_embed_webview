@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 abstract class SocialMediaGeneric {
   const SocialMediaGeneric(this.aspectRatio);
 
@@ -7,6 +5,7 @@ abstract class SocialMediaGeneric {
 
   String get getHtml;
   String get pauseVideoScript;
+  String get stopVideoScript;
 
   static String embedElementId = 'widget';
 

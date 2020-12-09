@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                   // ),
                   // SocialEmbed(
                   //     embedCode: dataYt, type: SocailMediaPlatforms.youtube),
-                  CustomWebView(socialMediaObj: Youtube(videoId: dataYt))
+                  SocialEmbed(socialMediaObj: Youtube(videoId: dataYt))
                 ],
               ),
             ),
