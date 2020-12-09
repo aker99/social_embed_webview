@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_embed_webview/platforms/youtube.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 
 // <srcipts>...</scripts> tag has been removed
@@ -40,22 +41,23 @@ class MyApp extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  SocialEmbed(
-                    embedCode: tweetContent,
-                    type: SocailMediaPlatforms.twitter,
-                  ),
-                  SocialEmbed(
-                      embedCode: instaContent,
-                      type: SocailMediaPlatforms.instagram),
-                  SocialEmbed(
-                      embedCode: dataFb,
-                      type: SocailMediaPlatforms.facebook_video),
-                  SocialEmbed(
-                    embedCode: dataFBPost,
-                    type: SocailMediaPlatforms.facebook_post,
-                  ),
-                  SocialEmbed(
-                      embedCode: dataYt, type: SocailMediaPlatforms.youtube),
+                  // SocialEmbed(
+                  //   embedCode: tweetContent,
+                  //   type: SocailMediaPlatforms.twitter,
+                  // ),
+                  // SocialEmbed(
+                  //     embedCode: instaContent,
+                  //     type: SocailMediaPlatforms.instagram),
+                  // SocialEmbed(
+                  //     embedCode: dataFb,
+                  //     type: SocailMediaPlatforms.facebook_video),
+                  // SocialEmbed(
+                  //   embedCode: dataFBPost,
+                  //   type: SocailMediaPlatforms.facebook_post,
+                  // ),
+                  // SocialEmbed(
+                  //     embedCode: dataYt, type: SocailMediaPlatforms.youtube),
+                  CustomWebView(socialMediaObj: Youtube(videoId: dataYt))
                 ],
               ),
             ),
