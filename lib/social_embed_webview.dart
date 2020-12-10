@@ -96,7 +96,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   void _setHeight(double height) {
     // if (this.mounted) {
     setState(() {
-      _height = height + 17;
+      _height = height + smObj.bottomMargin;
     });
     // }
   }
@@ -109,7 +109,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
 
   String getHtmlBody() => """
       <body>
-        <div id="widget">${smObj.htmlBody}</div>
+        <div  style="margin: -8px -7px 0px -7px;" id="widget">${smObj.htmlBody}</div>
         ${(smObj.aspectRatio == null) ? dynamicHeightScriptSetup : ''}
         ${(smObj.canChangeSize) ? dynamicHeightScriptCheck : ''}
       </body>

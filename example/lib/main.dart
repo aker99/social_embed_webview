@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:social_embed_webview/platforms/facebook-video.dart';
+import 'package:social_embed_webview/platforms/facebook-post.dart';
 import 'package:social_embed_webview/platforms/youtube.dart';
 import 'package:social_embed_webview/platforms/instagram.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
@@ -40,25 +42,25 @@ class MyApp extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(2),
               child: Column(
                 children: [
-                  SocialEmbed(
-                      socialMediaObj:
-                          TwitterEmbedData(embedHtml: tweetContent)),
+                  // SocialEmbed(
+                  //     socialMediaObj:
+                  //         TwitterEmbedData(embedHtml: tweetContent)),
                   SocialEmbed(
                       socialMediaObj:
                           InstagramEmbedData(embedHtml: instaContent)),
                   // SocialEmbed(
-                  //     embedCode: dataFb,
-                  //     type: SocailMediaPlatforms.facebook_video),
-                  // SocialEmbed(
-                  //   embedCode: dataFBPost,
-                  //   type: SocailMediaPlatforms.facebook_post,
-                  // ),
-                  // SocialEmbed(
-                  //     embedCode: dataYt, type: SocailMediaPlatforms.youtube),
-                  SocialEmbed(socialMediaObj: YoutubeEmbedData(videoId: dataYt))
+                  //     socialMediaObj: YoutubeEmbedData(videoId: dataYt)),
+                  SocialEmbed(
+                      socialMediaObj: FacebookVideoEmbedData(videoUrl: dataFb)),
+                  SocialEmbed(
+                      socialMediaObj:
+                          FacebookPostEmbedData(postUrl: dataFBPost)),
+                  SizedBox(
+                    height: 10,
+                  )
                 ],
               ),
             ),
