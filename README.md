@@ -1,6 +1,10 @@
 # Social Embed WebView (Developers Preview) 
 Currently non of the major social media platform provides support to embed their post in a flutter app. This flutter package provides widgets to embed posts of various social media platforms using [webview_flutter](https://pub.dev/packages/webview_flutter) in the background.
 
+**Please note**
+* *version < 0.3.0* is not backward compatiable from this version. So please go through examples before upgrading
+* Current version has not been tested on iOS. Contribution for the same would be engouraged.
+
 ## Content
 * [Social Embed WebView](#social-embed-webView)
 * [Why Us](#why-us)
@@ -9,6 +13,7 @@ Currently non of the major social media platform provides support to embed their
 * [Contribution](https://github.com/aker99/social_embed_webview/blob/master/CONTRIBUTION.md)
 * [Examples](#example)
 * [Output](#output)
+* [Known Bugs](#known-bugs)
 
 ## Why Us
 They are not many solutions in the community to solve this problem. All the packages use the same [webview_flutter](https://pub.dev/packages/webview_flutter) in the background but have a major issue of a *predefined height*. While this package *adjusts the heights of the webview automatically* according to the size of the embedded post.
@@ -17,14 +22,14 @@ They are not many solutions in the community to solve this problem. All the pack
 * [Instagram](https://instagram.com)
 * [Twitter](https://twitter.com)
 * [Youtube](https://youtube.com)
-* [Facebook](https://facebook.com)
+* [Facebook](https://facebook.com) (Comming Back Soon!)
 
 ## How to use?
 **1:** Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  social_embed_webview: ^0.2.1+9
+  social_embed_webview: ^0.3.0-dev.4
 ```
 
 **2:** You can install packages from the command line:
@@ -40,11 +45,12 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 ## Example
 Please make sure to remove `<script>...</script>` added by the platform with other embed code.
-Please visit [Github](https://github.com/aker99/social_embed_webview/blob/master/example/lib/main.dart) / [Pub.dev-Example](https://pub.dev/packages/social_embed_webview/example) for more detailed examples corresponding to each platform
+Please visit [examples](https://pub.dev/packages/social_embed_webview/example) for more detailed examples corresponding to each platform
 ```
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 
+/// <srcipts>...</scripts> tag has been removed
 String tweetContent = r"""
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here’s an edit I did of one of my drawings. I tend to draw a lot of aot stuff when each chapter is released. Sorry about that!<br>Song: polnalyubvi кометы<br>Character: Annie Leonhart <a href="https://twitter.com/hashtag/annieleonhart?src=hash&amp;ref_src=twsrc%5Etfw">#annieleonhart</a> <a href="https://twitter.com/hashtag/aot131spoilers?src=hash&amp;ref_src=twsrc%5Etfw">#aot131spoilers</a> <a href="https://twitter.com/hashtag/aot?src=hash&amp;ref_src=twsrc%5Etfw">#aot</a> <a href="https://twitter.com/hashtag/AttackOnTitan131?src=hash&amp;ref_src=twsrc%5Etfw">#AttackOnTitan131</a> <a href="https://twitter.com/hashtag/AttackOnTitans?src=hash&amp;ref_src=twsrc%5Etfw">#AttackOnTitans</a> <a href="https://twitter.com/hashtag/snk?src=hash&amp;ref_src=twsrc%5Etfw">#snk</a> <a href="https://twitter.com/hashtag/snk131?src=hash&amp;ref_src=twsrc%5Etfw">#snk131</a> <a href="https://twitter.com/hashtag/shingekinokyojin?src=hash&amp;ref_src=twsrc%5Etfw">#shingekinokyojin</a> <a href="https://t.co/b4z48ruCoD">pic.twitter.com/b4z48ruCoD</a></p>&mdash; evie (@hazbin_freak22) <a href="https://twitter.com/hazbin_freak22/status/1291884358870142976?ref_src=twsrc%5Etfw">August 7, 2020</a></blockquote> """;
 
@@ -73,8 +79,8 @@ class MyApp extends StatelessWidget {
               child: Column(
                 children: [
                   SocialEmbed(
-                    embedCode: tweetContent,
-                    type: SocailMediaPlatforms.twitter,
+                      socialMediaObj:
+                          TwitterEmbedData(embedHtml: tweetContent)),
                   )
                 ],
               ),
@@ -91,6 +97,9 @@ class MyApp extends StatelessWidget {
 
 * [Twitter](outputs/tw.jpeg) 
 * [Instragram](outputs/ig.jpeg)
-* [Youtube](outputs/yt.jpeg)  
-* [Facebook Post](outputs/fb-p.jpeg)
-* [Facebook Video](outputs/fb-v.jpeg)  
+* [Youtube](outputs/yt.jpeg)   
+
+## Known Bugs
+* Media playback continuous incase of *router.push()* for all platform
+* Media playback continuous incase of *app going in background* for all platform except *Youtube*
+* Sometime widget background isn't set properly
