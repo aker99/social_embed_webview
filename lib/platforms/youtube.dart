@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'social-media-generic.dart';
 
-class Youtube extends SocialMediaGeneric {
+class YoutubeEmbedData extends SocialMediaGenericEmbedData {
   final String videoId;
 
-  static const String scriptUrl = 'https://www.youtube.com/iframe_api';
-  static String _script;
-  static String get script => (_script != null)
-      ? _script
-      : _script = SocialMediaGeneric.scriptGenrator(scriptUrl);
-
-  const Youtube({@required this.videoId}) : super(16 / 9);
+  const YoutubeEmbedData({@required this.videoId}) : super(aspectRatio: 16 / 9);
 
   @override
-  String get getHtml => """
+  String get htmlScriptUrl => 'https://www.youtube.com/iframe_api';
+
+  @override
+  String get htmlBody =>
+      """
     <div id="player"></div>
-    ${SocialMediaGeneric.scriptGenrator(scriptUrl)}
     <script>
       let player;
       function onYouTubeIframeAPIReady() {
@@ -37,7 +34,8 @@ class Youtube extends SocialMediaGeneric {
         player.pauseVideo();
       }
     </script>
-  """;
+  """ +
+      htmlScript;
 
   @override
   String get pauseVideoScript => "pauseVideo()";

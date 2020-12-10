@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/platforms/youtube.dart';
+import 'package:social_embed_webview/platforms/instagram.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 
 // <srcipts>...</scripts> tag has been removed
@@ -45,9 +46,9 @@ class MyApp extends StatelessWidget {
                   //   embedCode: tweetContent,
                   //   type: SocailMediaPlatforms.twitter,
                   // ),
-                  // SocialEmbed(
-                  //     embedCode: instaContent,
-                  //     type: SocailMediaPlatforms.instagram),
+                  SocialEmbed(
+                      socialMediaObj:
+                          InstagramEmbedData(embedHtml: instaContent)),
                   // SocialEmbed(
                   //     embedCode: dataFb,
                   //     type: SocailMediaPlatforms.facebook_video),
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
                   // ),
                   // SocialEmbed(
                   //     embedCode: dataYt, type: SocailMediaPlatforms.youtube),
-                  SocialEmbed(socialMediaObj: Youtube(videoId: dataYt))
+                  SocialEmbed(socialMediaObj: YoutubeEmbedData(videoId: dataYt))
                 ],
               ),
             ),

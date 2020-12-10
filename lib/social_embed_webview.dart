@@ -3,10 +3,11 @@ library social_embed_webview;
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/platforms/social-media-generic.dart';
 import 'package:social_embed_webview/utils/common-utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SocialEmbed extends StatefulWidget {
-  final SocialMediaGeneric socialMediaObj;
+  final SocialMediaGenericEmbedData socialMediaObj;
   final Color backgroundColor;
   const SocialEmbed(
       {Key key, @required this.socialMediaObj, this.backgroundColor})
@@ -18,13 +19,12 @@ class SocialEmbed extends StatefulWidget {
 
 class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   double _height = 300;
-  String htmlBody;
   WebViewController wbController;
-
+  SocialMediaGenericEmbedData smObj;
   @override
   void initState() {
     super.initState();
-    htmlBody = buildHTMLBody(context);
+    smObj = widget.socialMediaObj;
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -40,25 +40,37 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         break;
       case AppLifecycleState.detached:
-        wbController.evaluateJavascript(widget.socialMediaObj.stopVideoScript)
+        wbController.evaluateJavascript(smObj.stopVideoScript);
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
-        wbController.evaluateJavascript(widget.socialMediaObj.pauseVideoScript);
+        wbController.evaluateJavascript(smObj.pauseVideoScript);
         break;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final html = buildHTMLBody(context);
     final wv = WebView(
-      initialUrl: htmlToURI(htmlBody),
-      javascriptChannels:
-          <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
-      javascriptMode: JavascriptMode.unrestricted,
-      onWebViewCreated: (wbc) => wbController = wbc,
-    );
-    final ar = widget.socialMediaObj.aspectRatio;
+        initialUrl: htmlToURI(html),
+        javascriptChannels:
+            <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
+        javascriptMode: JavascriptMode.unrestricted,
+        onWebViewCreated: (wbc) {
+          wbController = wbc;
+          // wbController.evaluateJavascript(smObj.htmlScript);
+        },
+        onPageFinished: (str) =>
+            wbController.evaluateJavascript('sendHeight()'),
+        navigationDelegate: (navigation) async {
+          final url = navigation.url;
+          if (await canLaunch(url)) {
+            launch(url);
+          }
+          return NavigationDecision.prevent;
+        });
+    final ar = smObj.aspectRatio;
     return (ar != null)
         ? AspectRatio(aspectRatio: ar, child: wv)
         : SizedBox(height: _height, child: wv);
@@ -73,37 +85,35 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   }
 
   void _setHeight(double height) {
-    if (this.mounted) {
-      setState(() {
-        _height = height + 17;
-      });
-    }
+    // if (this.mounted) {
+    setState(() {
+      _height = height + 17;
+    });
+    // }
   }
 
   Color getBackgroundColor(BuildContext context) {
-    // final color = widget.backgroundColor;
-    // return (color == null) ? Theme.of(context).scaffoldBackgroundColor : color;
-    return Colors.white;
+    final color = widget.backgroundColor;
+    return (color == null) ? Theme.of(context).scaffoldBackgroundColor : color;
   }
 
   String buildHTMLBody(BuildContext context) {
     return """
       <body style="background-color: ${colorToHtmlRGBA(getBackgroundColor(context))}">
-        <div id="widget">${widget.socialMediaObj.getHtml}</div>
-        $dynamicHeightScript
+        <div id="widget">${smObj.htmlBody}</div>
+        <script type="text/javascript">
+          const widget = document.getElementById('widget');
+          const sendHeight = () => PageHeight.postMessage(widget.clientHeight);
+          ${(smObj.canChangeSize) ? dynamicHeightScript : ''}
+        </script>
       </body>
     """;
   }
 
   static const String dynamicHeightScript = """
     <script type="text/javascript">
-      const onWidgetResize = (widgets) => {
-        const rect = widgets[0].contentRect;
-        let height = rect.height;
-        PageHeight.postMessage(height);
-      }
+      const onWidgetResize = (widgets) => sendHeight();
       const resize_ob = new ResizeObserver(onWidgetResize);
-      const widget = document.getElementById('widget');
       resize_ob.observe(widget);
     </script>
   """;
