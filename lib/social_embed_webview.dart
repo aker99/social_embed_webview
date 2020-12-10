@@ -21,17 +21,20 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   double _height = 300;
   WebViewController wbController;
   SocialMediaGenericEmbedData smObj;
+  String htmlBody;
+
   @override
   void initState() {
     super.initState();
     smObj = widget.socialMediaObj;
-    WidgetsBinding.instance.addObserver(this);
+    htmlBody = getHtmlBody();
+    if (smObj.supportMediaControll) WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
+    if (smObj.supportMediaControll) super.dispose();
   }
 
   @override
@@ -51,18 +54,24 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final html = buildHTMLBody(context);
     final wv = WebView(
-        initialUrl: htmlToURI(html),
+        initialUrl: htmlToURI(htmlBody),
         javascriptChannels:
             <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
         javascriptMode: JavascriptMode.unrestricted,
+        onPageStarted: (url) {
+          final color = colorToHtmlRGBA(getBackgroundColor(context));
+          wbController.evaluateJavascript(
+              'document.body.style= "background-color: $color"');
+        },
         onWebViewCreated: (wbc) {
           wbController = wbc;
           // wbController.evaluateJavascript(smObj.htmlScript);
         },
-        onPageFinished: (str) =>
-            wbController.evaluateJavascript('sendHeight()'),
+        onPageFinished: (str) {
+          if (smObj.aspectRatio == null)
+            wbController.evaluateJavascript('sendHeight()');
+        },
         navigationDelegate: (navigation) async {
           final url = navigation.url;
           if (await canLaunch(url)) {
@@ -92,25 +101,28 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
     // }
   }
 
+  // style=": "
   Color getBackgroundColor(BuildContext context) {
     final color = widget.backgroundColor;
     return (color == null) ? Theme.of(context).scaffoldBackgroundColor : color;
   }
 
-  String buildHTMLBody(BuildContext context) {
-    return """
-      <body style="background-color: ${colorToHtmlRGBA(getBackgroundColor(context))}">
+  String getHtmlBody() => """
+      <body>
         <div id="widget">${smObj.htmlBody}</div>
-        <script type="text/javascript">
-          const widget = document.getElementById('widget');
-          const sendHeight = () => PageHeight.postMessage(widget.clientHeight);
-          ${(smObj.canChangeSize) ? dynamicHeightScript : ''}
-        </script>
+        ${(smObj.aspectRatio == null) ? dynamicHeightScriptSetup : ''}
+        ${(smObj.canChangeSize) ? dynamicHeightScriptCheck : ''}
       </body>
     """;
-  }
 
-  static const String dynamicHeightScript = """
+  static const String dynamicHeightScriptSetup = """
+    <script type="text/javascript">
+      const widget = document.getElementById('widget');
+      const sendHeight = () => PageHeight.postMessage(widget.clientHeight);
+    </script>
+  """;
+
+  static const String dynamicHeightScriptCheck = """
     <script type="text/javascript">
       const onWidgetResize = (widgets) => sendHeight();
       const resize_ob = new ResizeObserver(onWidgetResize);

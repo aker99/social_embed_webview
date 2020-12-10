@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/platforms/youtube.dart';
 import 'package:social_embed_webview/platforms/instagram.dart';
+import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 
 // <srcipts>...</scripts> tag has been removed
@@ -42,10 +43,9 @@ class MyApp extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  // SocialEmbed(
-                  //   embedCode: tweetContent,
-                  //   type: SocailMediaPlatforms.twitter,
-                  // ),
+                  SocialEmbed(
+                      socialMediaObj:
+                          TwitterEmbedData(embedHtml: tweetContent)),
                   SocialEmbed(
                       socialMediaObj:
                           InstagramEmbedData(embedHtml: instaContent)),

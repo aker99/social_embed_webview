@@ -6,7 +6,7 @@
     "configurations": [
     
         {
-            "name": "Dart",
+            "name": "Social Embed Webview",
             "program": "example/lib/main.dart",
             "request": "launch",
             "type": "dart"
