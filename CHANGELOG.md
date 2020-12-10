@@ -1,4 +1,4 @@
-## [0.3.0-dev.4] - Refactoring, Bug Fix and Dependencies update: 2020-12-XX.
+## [0.3.0-dev.4] - Refactoring, Bug Fix and Dependencies update: 2020-12-11.
 * Breaking Changes (**Not backward compatiable**)
 * Bug Fix
     * Webview auto dispose (Fixed by *webview_flutter*)
