@@ -42,25 +42,22 @@ class MyApp extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(2),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  // SocialEmbed(
-                  //     socialMediaObj:
-                  //         TwitterEmbedData(embedHtml: tweetContent)),
+                  SocialEmbed(
+                      socialMediaObj:
+                          TwitterEmbedData(embedHtml: tweetContent)),
                   SocialEmbed(
                       socialMediaObj:
                           InstagramEmbedData(embedHtml: instaContent)),
-                  // SocialEmbed(
-                  //     socialMediaObj: YoutubeEmbedData(videoId: dataYt)),
+                  SocialEmbed(
+                      socialMediaObj: YoutubeEmbedData(videoId: dataYt)),
                   SocialEmbed(
                       socialMediaObj: FacebookVideoEmbedData(videoUrl: dataFb)),
                   SocialEmbed(
                       socialMediaObj:
                           FacebookPostEmbedData(postUrl: dataFBPost)),
-                  SizedBox(
-                    height: 10,
-                  )
                 ],
               ),
             ),
