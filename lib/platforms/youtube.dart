@@ -14,7 +14,7 @@ class YoutubeEmbedData extends SocialMediaGenericEmbedData {
   @override
   String get htmlBody =>
       """
-    <div id="player"></div>
+    <div id="player" style="position: fixed; bottom: 0px;"></div>
     <script>
       let player;
       function onYouTubeIframeAPIReady() {

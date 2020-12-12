@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:social_embed_webview/platforms/facebook-video.dart';
+import 'package:social_embed_webview/platforms/facebook-post.dart';
 import 'package:social_embed_webview/platforms/youtube.dart';
 import 'package:social_embed_webview/platforms/instagram.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
                   SocialEmbed(
@@ -49,7 +51,13 @@ class MyApp extends StatelessWidget {
                   SocialEmbed(
                       socialMediaObj:
                           InstagramEmbedData(embedHtml: instaContent)),
-                  SocialEmbed(socialMediaObj: YoutubeEmbedData(videoId: dataYt))
+                  SocialEmbed(
+                      socialMediaObj: YoutubeEmbedData(videoId: dataYt)),
+                  SocialEmbed(
+                      socialMediaObj: FacebookVideoEmbedData(videoUrl: dataFb)),
+                  SocialEmbed(
+                      socialMediaObj:
+                          FacebookPostEmbedData(postUrl: dataFBPost)),
                 ],
               ),
             ),

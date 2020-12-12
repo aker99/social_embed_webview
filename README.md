@@ -22,14 +22,14 @@ They are not many solutions in the community to solve this problem. All the pack
 * [Instagram](https://instagram.com)
 * [Twitter](https://twitter.com)
 * [Youtube](https://youtube.com)
-* [Facebook](https://facebook.com) (Comming Back Soon!)
+* [Facebook](https://facebook.com)
 
 ## How to use?
 **1:** Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  social_embed_webview: ^0.3.0-dev.4
+  social_embed_webview: ^0.3.0
 ```
 
 **2:** You can install packages from the command line:
@@ -98,8 +98,9 @@ class MyApp extends StatelessWidget {
 * [Twitter](outputs/tw.jpeg) 
 * [Instragram](outputs/ig.jpeg)
 * [Youtube](outputs/yt.jpeg)   
+* [Facebook Video](outputs/fb-v.jpeg)   
+* [Facebook Post](outputs/fb-p.jpeg)   
 
 ## Known Bugs
 * Media playback continuous incase of *router.push()* for all platform
 * Media playback continuous incase of *app going in background* for all platform except *Youtube*
-* Sometime widget background isn't set properly
