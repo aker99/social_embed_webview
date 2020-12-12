@@ -33,8 +33,9 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    if (smObj.supportMediaControll) super.dispose();
+    if (smObj.supportMediaControll)
+      WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -59,15 +60,13 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
         javascriptChannels:
             <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
         javascriptMode: JavascriptMode.unrestricted,
-        onPageStarted: (url) {
-          final color = colorToHtmlRGBA(getBackgroundColor(context));
-          wbController.evaluateJavascript(
-              'document.body.style= "background-color: $color"');
-        },
         onWebViewCreated: (wbc) {
           wbController = wbc;
         },
         onPageFinished: (str) {
+          final color = colorToHtmlRGBA(getBackgroundColor(context));
+          wbController.evaluateJavascript(
+              'document.body.style= "background-color: $color"');
           if (smObj.aspectRatio == null)
             wbController.evaluateJavascript('sendHeight()');
         },
@@ -94,7 +93,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
 
   void _setHeight(double height) {
     setState(() {
-      _height = height + 17;
+      _height = height + smObj.bottomMargin;
     });
   }
 
@@ -105,7 +104,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
 
   String getHtmlBody() => """
       <body>
-        <div id="widget">${smObj.htmlBody}</div>
+        <div  style="margin: -8px -7px 0px -7px;" id="widget">${smObj.htmlBody}</div>
         ${(smObj.aspectRatio == null) ? dynamicHeightScriptSetup : ''}
         ${(smObj.canChangeSize) ? dynamicHeightScriptCheck : ''}
       </body>

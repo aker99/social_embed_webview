@@ -1,3 +1,9 @@
+## [0.3.0] - Bug Fix: 2020-12-12.
+* **Added Suport** of Facebook Video/Post
+* Bug Fix
+    * Extra margin inside webview removed (*Resulting increase width of embed by 14px*)
+    * Jitter in webview background-color removed
+
 ## [0.3.0-dev.4] - Refactoring, Bug Fix and Dependencies update: 2020-12-11.
 * Breaking Changes (**Not backward compatiable**)
 * Bug Fix
