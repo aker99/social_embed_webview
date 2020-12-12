@@ -33,8 +33,9 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    if (smObj.supportMediaControll) super.dispose();
+    if (smObj.supportMediaControll)
+      WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -59,16 +60,14 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
         javascriptChannels:
             <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
         javascriptMode: JavascriptMode.unrestricted,
-        onPageStarted: (url) {
-          final color = colorToHtmlRGBA(getBackgroundColor(context));
-          wbController.evaluateJavascript(
-              'document.body.style= "background-color: $color"');
-        },
         onWebViewCreated: (wbc) {
           wbController = wbc;
           // wbController.evaluateJavascript(smObj.htmlScript);
         },
         onPageFinished: (str) {
+          final color = colorToHtmlRGBA(getBackgroundColor(context));
+          wbController.evaluateJavascript(
+              'document.body.style= "background-color: $color"');
           if (smObj.aspectRatio == null)
             wbController.evaluateJavascript('sendHeight()');
         },
