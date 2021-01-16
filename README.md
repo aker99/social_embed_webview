@@ -3,7 +3,6 @@ Currently non of the major social media platform provides support to embed their
 
 **Please note**
 * *version < 0.3.0* is not backward compatiable from this version. So please go through examples before upgrading
-* Current version has not been tested on iOS. Contribution for the same would be engouraged.
 
 ## Content
 * [Social Embed WebView](#social-embed-webView)
@@ -29,7 +28,7 @@ They are not many solutions in the community to solve this problem. All the pack
 
 ```yaml
 dependencies:
-  social_embed_webview: ^0.3.0
+  social_embed_webview: 0.3.1
 ```
 
 **2:** You can install packages from the command line:

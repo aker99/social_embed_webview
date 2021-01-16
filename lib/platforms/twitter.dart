@@ -6,7 +6,7 @@ class TwitterEmbedData extends SocialMediaGenericEmbedData {
   final String embedHtml;
 
   const TwitterEmbedData({@required this.embedHtml})
-      : super(canChangeSize: true, bottomMargin: 4.7);
+      : super(canChangeSize: true, bottomMargin: -10);
 
   @override
   String get htmlScriptUrl => 'https://platform.twitter.com/widgets.js';

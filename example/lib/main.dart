@@ -41,26 +41,21 @@ class MyApp extends StatelessWidget {
             title: Text('Social Embed WebView Example'),
           ),
           body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
+            child: Column(
                 children: [
-                  SocialEmbed(
-                      socialMediaObj:
-                          TwitterEmbedData(embedHtml: tweetContent)),
-                  SocialEmbed(
-                      socialMediaObj:
-                          InstagramEmbedData(embedHtml: instaContent)),
-                  SocialEmbed(
-                      socialMediaObj: YoutubeEmbedData(videoId: dataYt)),
-                  SocialEmbed(
-                      socialMediaObj: FacebookVideoEmbedData(videoUrl: dataFb)),
-                  SocialEmbed(
-                      socialMediaObj:
-                          FacebookPostEmbedData(postUrl: dataFBPost)),
-                ],
-              ),
-            ),
+              TwitterEmbedData(embedHtml: tweetContent),
+              InstagramEmbedData(embedHtml: instaContent),
+              YoutubeEmbedData(videoId: dataYt),
+              FacebookVideoEmbedData(videoUrl: dataFb),
+              FacebookPostEmbedData(postUrl: dataFBPost)
+            ]
+                    .map((o) => Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: SocialEmbed(
+                            socialMediaObj: o,
+                          ),
+                        ))
+                    .toList()),
           ),
         ),
       ),

@@ -16,7 +16,7 @@ abstract class SocialMediaGenericEmbedData {
   String get pauseVideoScript => '';
   String get startVideoScript => '';
   String get stopVideoScript => '';
-
+  String get htmlInlineStyling => '';
   String get htmlScript => """
     <script type="text/javascript" src="$htmlScriptUrl"></script>
   """;
