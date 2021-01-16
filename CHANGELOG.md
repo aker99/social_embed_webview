@@ -1,3 +1,7 @@
+## [0.3.0] - Bug Fix:
+* Bug Fix
+    * Instagram height adjust issue fix
+
 ## [0.3.0] - Bug Fix: 2020-12-12.
 * **Added Suport** of Facebook Video/Post
 * Bug Fix

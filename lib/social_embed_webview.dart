@@ -72,15 +72,19 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
         },
         navigationDelegate: (navigation) async {
           final url = navigation.url;
-          if (await canLaunch(url)) {
+          if (navigation.isForMainFrame && await canLaunch(url)) {
             launch(url);
+            return NavigationDecision.prevent;
           }
-          return NavigationDecision.prevent;
+          return NavigationDecision.navigate;
         });
     final ar = smObj.aspectRatio;
-    return (ar != null)
-        ? AspectRatio(aspectRatio: ar, child: wv)
-        : SizedBox(height: _height, child: wv);
+    return Container(
+      width: double.infinity,
+      child: (ar != null)
+          ? AspectRatio(aspectRatio: ar, child: wv)
+          : SizedBox(height: _height, child: wv),
+    );
   }
 
   JavascriptChannel _getHeightJavascriptChannel() {
