@@ -1,6 +1,11 @@
-## [0.3.0] - Bug Fix:
+## [0.3.1] - Bug Fix: 2021-01-17
+* *Flutter SDK Version*  >= **1.22.0** (As required by *webview_flutter: 1.0.7*)
+* Center algined embed content w.r.t. to Webview.
 * Bug Fix
     * Instagram height adjust issue fix
+    * **iOS**
+        * Twitter blank webview issue fixed #4 
+        * Embed content now auto adjust to cover the screen width #7
 
 ## [0.3.0] - Bug Fix: 2020-12-12.
 * **Added Suport** of Facebook Video/Post

@@ -68,7 +68,8 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
           wbController.evaluateJavascript(
               'document.body.style= "background-color: $color"');
           if (smObj.aspectRatio == null)
-            wbController.evaluateJavascript('sendHeight()');
+            wbController
+                .evaluateJavascript('setTimeout(() => sendHeight(), 0)');
         },
         navigationDelegate: (navigation) async {
           final url = navigation.url;
@@ -79,12 +80,14 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
           return NavigationDecision.navigate;
         });
     final ar = smObj.aspectRatio;
-    return Container(
-      width: double.infinity,
-      child: (ar != null)
-          ? AspectRatio(aspectRatio: ar, child: wv)
-          : SizedBox(height: _height, child: wv),
-    );
+    return (ar != null)
+        ? ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height / 1.5,
+                maxWidth: double.infinity),
+            child: AspectRatio(aspectRatio: ar, child: wv),
+          )
+        : SizedBox(height: _height, child: wv);
   }
 
   JavascriptChannel _getHeightJavascriptChannel() {
@@ -107,12 +110,27 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   }
 
   String getHtmlBody() => """
-      <body>
-        <div  style="margin: -8px -7px 0px -7px;" id="widget">${smObj.htmlBody}</div>
-        ${(smObj.aspectRatio == null) ? dynamicHeightScriptSetup : ''}
-        ${(smObj.canChangeSize) ? dynamicHeightScriptCheck : ''}
-      </body>
+      <html>
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+            *{box-sizing: border-box;margin:0px; padding:0px;}
+              #widget {
+                        display: flex;
+                        justify-content: center;
+                        margin: 0 auto;
+                        max-width:100%;
+                    }      
+          </style>
+        </head>
+        <body>
+          <div id="widget" style="${smObj.htmlInlineStyling}">${smObj.htmlBody}</div>
+          ${(smObj.aspectRatio == null) ? dynamicHeightScriptSetup : ''}
+          ${(smObj.canChangeSize) ? dynamicHeightScriptCheck : ''}
+        </body>
+      </html>
     """;
+//  -8px -7px 0px -7px;
 
   static const String dynamicHeightScriptSetup = """
     <script type="text/javascript">
