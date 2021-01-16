@@ -83,8 +83,9 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
     return (ar != null)
         ? ConstrainedBox(
             constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height / 1.5,
-                maxWidth: double.infinity),
+              maxHeight: MediaQuery.of(context).size.height / 1.5,
+              maxWidth: double.infinity,
+            ),
             child: AspectRatio(aspectRatio: ar, child: wv),
           )
         : SizedBox(height: _height, child: wv);
@@ -130,7 +131,6 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
         </body>
       </html>
     """;
-//  -8px -7px 0px -7px;
 
   static const String dynamicHeightScriptSetup = """
     <script type="text/javascript">

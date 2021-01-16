@@ -1,6 +1,6 @@
 ## [0.3.1] - Bug Fix: 2021-01-17
 * *Flutter SDK Version*  >= **1.22.0** (As required by *webview_flutter: 1.0.7*)
-* Center algined embed content w.r.t. to Webview.
+* Center aligned embed content w.r.t. to Webview.
 * Bug Fix
     * Instagram height adjust issue fix
     * **iOS**
