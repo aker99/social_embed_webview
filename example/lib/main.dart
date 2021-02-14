@@ -4,6 +4,7 @@ import 'package:social_embed_webview/platforms/facebook-post.dart';
 import 'package:social_embed_webview/platforms/youtube.dart';
 import 'package:social_embed_webview/platforms/instagram.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
+import 'package:social_embed_webview/platforms/tiktok.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 
 /// <srcipts>...</scripts> tag has been removed
@@ -20,6 +21,9 @@ String dataFBPost = "https://www.facebook.com/WHO/posts/3425180564193969";
 
 /// id of youtube video. eg: https://www.youtube.com/watch?v=F8JfodMfQbg value after `?v=`
 String dataYt = "F8JfodMfQbg";
+
+String dataTiktok =
+    r"""<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@guinnessworldrecords/video/6927634614034926853" data-video-id="6927634614034926853" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@guinnessworldrecords" href="https://www.tiktok.com/@guinnessworldrecords">@guinnessworldrecords</a> <p>Fastest speed achieved by a vehicle indoors: 165.20 km&#47;h (102.65 mph) by Leh Keen &#38; @porsche  ⚡️</p> <a target="_blank" title="♬ original sound - Guinness World Records" href="https://www.tiktok.com/music/original-sound-6927634604195121925">♬ original sound - Guinness World Records</a> </section> </blockquote>""";
 
 void main() {
   runApp(MyApp());
@@ -43,11 +47,12 @@ class MyApp extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
                 children: [
-              TwitterEmbedData(embedHtml: tweetContent),
-              InstagramEmbedData(embedHtml: instaContent),
-              YoutubeEmbedData(videoId: dataYt),
-              FacebookVideoEmbedData(videoUrl: dataFb),
-              FacebookPostEmbedData(postUrl: dataFBPost)
+              // TwitterEmbedData(embedHtml: tweetContent),
+              // InstagramEmbedData(embedHtml: instaContent),
+              // YoutubeEmbedData(videoId: dataYt),
+              // FacebookVideoEmbedData(videoUrl: dataFb),
+              // FacebookPostEmbedData(postUrl: dataFBPost)
+              TiktokEmbedData(embedHtml: dataTiktok)
             ]
                     .map((o) => Padding(
                           padding: const EdgeInsets.all(5.0),
