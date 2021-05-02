@@ -5,7 +5,7 @@ import 'social-media-generic.dart';
 class FacebookVideoEmbedData extends SocialMediaGenericEmbedData {
   final String videoUrl;
 
-  const FacebookVideoEmbedData({@required this.videoUrl})
+  const FacebookVideoEmbedData({required this.videoUrl})
       : super(aspectRatio: 16 / 9);
 
   @override

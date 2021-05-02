@@ -8,9 +8,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class SocialEmbed extends StatefulWidget {
   final SocialMediaGenericEmbedData socialMediaObj;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   const SocialEmbed(
-      {Key key, @required this.socialMediaObj, this.backgroundColor})
+      {Key? key, required this.socialMediaObj, this.backgroundColor})
       : super(key: key);
 
   @override
@@ -19,22 +19,21 @@ class SocialEmbed extends StatefulWidget {
 
 class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   double _height = 300;
-  WebViewController wbController;
-  SocialMediaGenericEmbedData smObj;
-  String htmlBody;
+  late WebViewController wbController;
+  late String htmlBody;
 
   @override
   void initState() {
     super.initState();
-    smObj = widget.socialMediaObj;
     htmlBody = getHtmlBody();
-    if (smObj.supportMediaControll) WidgetsBinding.instance.addObserver(this);
+    if (widget.socialMediaObj.supportMediaControll)
+      WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
   void dispose() {
-    if (smObj.supportMediaControll)
-      WidgetsBinding.instance.removeObserver(this);
+    if (widget.socialMediaObj.supportMediaControll)
+      WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 
@@ -44,11 +43,11 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         break;
       case AppLifecycleState.detached:
-        wbController.evaluateJavascript(smObj.stopVideoScript);
+        wbController.evaluateJavascript(widget.socialMediaObj.stopVideoScript);
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
-        wbController.evaluateJavascript(smObj.pauseVideoScript);
+        wbController.evaluateJavascript(widget.socialMediaObj.pauseVideoScript);
         break;
     }
   }
@@ -68,7 +67,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
           final color = colorToHtmlRGBA(getBackgroundColor(context));
           wbController.evaluateJavascript(
               'document.body.style= "background-color: $color"');
-          if (smObj.aspectRatio == null)
+          if (widget.socialMediaObj.aspectRatio == null)
             wbController
                 .evaluateJavascript('setTimeout(() => sendHeight(), 0)');
         },
@@ -80,7 +79,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
           }
           return NavigationDecision.navigate;
         });
-    final ar = smObj.aspectRatio;
+    final ar = widget.socialMediaObj.aspectRatio;
     return (ar != null)
         ? ConstrainedBox(
             constraints: BoxConstraints(
@@ -102,13 +101,12 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
 
   void _setHeight(double height) {
     setState(() {
-      _height = height + smObj.bottomMargin;
+      _height = height + widget.socialMediaObj.bottomMargin;
     });
   }
 
   Color getBackgroundColor(BuildContext context) {
-    final color = widget.backgroundColor;
-    return (color == null) ? Theme.of(context).scaffoldBackgroundColor : color;
+    return widget.backgroundColor ?? Theme.of(context).scaffoldBackgroundColor;
   }
 
   String getHtmlBody() => """
@@ -126,9 +124,9 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
           </style>
         </head>
         <body>
-          <div id="widget" style="${smObj.htmlInlineStyling}">${smObj.htmlBody}</div>
-          ${(smObj.aspectRatio == null) ? dynamicHeightScriptSetup : ''}
-          ${(smObj.canChangeSize) ? dynamicHeightScriptCheck : ''}
+          <div id="widget" style="${widget.socialMediaObj.htmlInlineStyling}">${widget.socialMediaObj.htmlBody}</div>
+          ${(widget.socialMediaObj.aspectRatio == null) ? dynamicHeightScriptSetup : ''}
+          ${(widget.socialMediaObj.canChangeSize) ? dynamicHeightScriptCheck : ''}
         </body>
       </html>
     """;

@@ -1,4 +1,9 @@
 ## [0.3.1] - Bug Fix: 2021-01-17
+* Upgraded to null safety 
+* Bug Fix
+    * iPhone twitter video not loading fixed #10
+
+## [0.3.1] - Bug Fix: 2021-01-17
 * *Flutter SDK Version*  >= **1.22.0** (As required by *webview_flutter: 1.0.7*)
 * Center aligned embed content w.r.t. to Webview.
 * Bug Fix

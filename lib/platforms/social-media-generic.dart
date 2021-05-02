@@ -7,7 +7,7 @@ abstract class SocialMediaGenericEmbedData {
   })  : assert(!(canChangeSize == true && aspectRatio != null)),
         assert(!(aspectRatio != null && bottomMargin != 0));
   // static final AssetsCache _assetsCache = AssetsCache();
-  final double aspectRatio;
+  final double? aspectRatio;
   final bool canChangeSize;
   final bool supportMediaControll;
   final double bottomMargin;
