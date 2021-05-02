@@ -5,7 +5,7 @@ import 'social-media-generic.dart';
 class FacebookPostEmbedData extends SocialMediaGenericEmbedData {
   final String postUrl;
 
-  const FacebookPostEmbedData({@required this.postUrl})
+  const FacebookPostEmbedData({required this.postUrl})
       : super(canChangeSize: true, bottomMargin: 2.5);
 
   @override

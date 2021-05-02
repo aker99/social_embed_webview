@@ -4,10 +4,9 @@ abstract class SocialMediaGenericEmbedData {
     this.canChangeSize = false,
     this.bottomMargin = 0,
     this.aspectRatio,
-  })  : assert(!(canChangeSize == true && aspectRatio != null)),
-        assert(!(aspectRatio != null && bottomMargin != 0));
+  }) : assert(!(aspectRatio != null && !canChangeSize && bottomMargin != 0));
   // static final AssetsCache _assetsCache = AssetsCache();
-  final double aspectRatio;
+  final double? aspectRatio;
   final bool canChangeSize;
   final bool supportMediaControll;
   final double bottomMargin;

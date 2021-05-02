@@ -5,7 +5,7 @@ import 'social-media-generic.dart';
 class InstagramEmbedData extends SocialMediaGenericEmbedData {
   final String embedHtml;
 
-  const InstagramEmbedData({@required this.embedHtml})
+  const InstagramEmbedData({required this.embedHtml})
       : super(bottomMargin: -10, canChangeSize: true);
 
   @override
