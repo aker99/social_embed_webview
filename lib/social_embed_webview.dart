@@ -19,13 +19,13 @@ class SocialEmbed extends StatefulWidget {
 
 class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   double _height = 300;
-  late WebViewController wbController;
+  late final WebViewController wbController;
   late String htmlBody;
 
   @override
   void initState() {
     super.initState();
-    htmlBody = getHtmlBody();
+    // htmlBody = ;
     if (widget.socialMediaObj.supportMediaControll)
       WidgetsBinding.instance!.addObserver(this);
   }
@@ -55,7 +55,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final wv = WebView(
-        initialUrl: htmlToURI(htmlBody),
+        initialUrl: htmlToURI(getHtmlBody()),
         javascriptChannels:
             <JavascriptChannel>[_getHeightJavascriptChannel()].toSet(),
         javascriptMode: JavascriptMode.unrestricted,
