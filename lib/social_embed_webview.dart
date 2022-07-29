@@ -25,15 +25,14 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    // htmlBody = ;
     if (widget.socialMediaObj.supportMediaControll)
-      WidgetsBinding.instance!.addObserver(this);
+      WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
     if (widget.socialMediaObj.supportMediaControll)
-      WidgetsBinding.instance!.removeObserver(this);
+      WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -120,7 +119,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
                         justify-content: center;
                         margin: 0 auto;
                         max-width:100%;
-                    }      
+                    }
           </style>
         </head>
         <body>
