@@ -1,9 +1,9 @@
 import 'social-media-generic.dart';
 
-class FacebookVideoEmbedData extends SocialMediaGenericEmbedData {
+class FacebookEmbedData extends SocialMediaGenericEmbedData {
   final String embedHtml;
 
-  const FacebookVideoEmbedData({required this.embedHtml})
+  const FacebookEmbedData({required this.embedHtml})
       : super(canChangeSize: true, bottomMargin: -10);
 
   @override

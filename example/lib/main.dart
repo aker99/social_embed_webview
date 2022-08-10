@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_embed_webview/platforms/facebook-video.dart';
-import 'package:social_embed_webview/platforms/facebook-post.dart';
+import 'package:social_embed_webview/platforms/facebook.dart';
 import 'package:social_embed_webview/platforms/youtube.dart';
 import 'package:social_embed_webview/platforms/instagram.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
@@ -46,8 +45,8 @@ class MyApp extends StatelessWidget {
               TwitterEmbedData(embedHtml: tweetContent),
               InstagramEmbedData(embedHtml: instaContent),
               YoutubeEmbedData(videoId: dataYt),
-              FacebookVideoEmbedData(videoUrl: dataFb),
-              FacebookPostEmbedData(postUrl: dataFBPost)
+              FacebookEmbedData(embedHtml: dataFb),
+              FacebookEmbedData(embedHtml: dataFBPost)
             ]
                     .map((o) => Padding(
                           padding: const EdgeInsets.all(5.0),
