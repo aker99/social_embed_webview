@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'social-media-generic.dart';
 
 class InstagramEmbedData extends SocialMediaGenericEmbedData {

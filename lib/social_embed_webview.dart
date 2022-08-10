@@ -3,7 +3,7 @@ library social_embed_webview;
 import 'package:flutter/material.dart';
 import 'package:social_embed_webview/platforms/social-media-generic.dart';
 import 'package:social_embed_webview/utils/common-utils.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SocialEmbed extends StatefulWidget {
@@ -42,11 +42,11 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
       case AppLifecycleState.resumed:
         break;
       case AppLifecycleState.detached:
-        wbController.evaluateJavascript(widget.socialMediaObj.stopVideoScript);
+        wbController.runJavascript(widget.socialMediaObj.stopVideoScript);
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
-        wbController.evaluateJavascript(widget.socialMediaObj.pauseVideoScript);
+        wbController.runJavascript(widget.socialMediaObj.pauseVideoScript);
         break;
     }
   }
@@ -64,16 +64,16 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
         },
         onPageFinished: (str) {
           final color = colorToHtmlRGBA(getBackgroundColor(context));
-          wbController.evaluateJavascript(
+          wbController.runJavascript(
               'document.body.style= "background-color: $color"');
           if (widget.socialMediaObj.aspectRatio == null)
             wbController
-                .evaluateJavascript('setTimeout(() => sendHeight(), 0)');
+                .runJavascript('setTimeout(() => sendHeight(), 0)');
         },
         navigationDelegate: (navigation) async {
           final url = navigation.url;
-          if (navigation.isForMainFrame && await canLaunch(url)) {
-            launch(url);
+          if (navigation.isForMainFrame && await canLaunchUrlString(url)) {
+            launchUrlString(url);
             return NavigationDecision.prevent;
           }
           return NavigationDecision.navigate;
