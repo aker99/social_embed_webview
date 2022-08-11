@@ -12,11 +12,10 @@ class InstagramEmbedData {
     this.bottomMargin = -10,
     this.canChangeSize = true,
     this.htmlScriptUrl =
-        '''<script type="text/javascript" src="https://www.instagram.com/embed.js"></script>''',
+        """<script type="text/javascript" src="https://www.instagram.com/embed.js"></script>""",
     this.htmlInlineStyling = '',
     this.aspectRatio,
     this.supportMediaController = false,
   });
-
   String get htmlBody => embedHtml + htmlScriptUrl;
 }
