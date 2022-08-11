@@ -5,7 +5,7 @@ class FacebookEmbedData {
   final String htmlScriptUrl;
   final String pauseVideoScript;
   final String stopVideoScript;
-  final bool supportMediaController = false;
+  final bool supportMediaController;
 
   FacebookEmbedData({
     required this.embedHtml,
@@ -15,5 +15,6 @@ class FacebookEmbedData {
         "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2",
     this.pauseVideoScript = "pauseVideo()",
     this.stopVideoScript = "stopVideo()",
+    this.supportMediaController = false,
   });
 }
