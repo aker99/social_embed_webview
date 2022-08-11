@@ -20,6 +20,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   double _height = 300;
   late final WebViewController wbController;
   late String htmlBody;
+  bool showProgressIndicator = true;
 
   @override
   void initState() {
@@ -67,6 +68,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
               .runJavascript('document.body.style= "background-color: $color"');
           if (widget.socialMediaObj.aspectRatio == null)
             wbController.runJavascript('setTimeout(() => sendHeight(), 0)');
+          setState(() => showProgressIndicator = false);
         },
         navigationDelegate: (navigation) async {
           final url = navigation.url;
@@ -83,9 +85,38 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
               maxHeight: MediaQuery.of(context).size.height / 1.5,
               maxWidth: double.infinity,
             ),
-            child: AspectRatio(aspectRatio: ar, child: wv),
+            child: Stack(
+              children: [
+                AspectRatio(aspectRatio: ar, child: wv),
+                AnimatedOpacity(
+                  opacity: showProgressIndicator ? 1 : 0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ],
+            ),
           )
-        : SizedBox(height: _height, child: wv);
+        : Stack(
+            children: [
+              AnimatedOpacity(
+                opacity: showProgressIndicator ? 0 : 1,
+                duration: const Duration(milliseconds: 300),
+                child: SizedBox(height: _height, child: wv),
+              ),
+              AnimatedOpacity(
+                opacity: showProgressIndicator ? 1 : 0,
+                duration: const Duration(milliseconds: 300),
+                child: SizedBox(
+                  height: _height,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
+            ],
+          );
   }
 
   JavascriptChannel _getHeightJavascriptChannel() {
