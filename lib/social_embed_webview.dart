@@ -71,7 +71,7 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
         navigationDelegate: (navigation) async {
           final url = navigation.url;
           if (navigation.isForMainFrame && await canLaunchUrlString(url)) {
-            launchUrlString(url);
+            launchUrlString(url, mode: LaunchMode.externalApplication);
             return NavigationDecision.prevent;
           }
           return NavigationDecision.navigate;
