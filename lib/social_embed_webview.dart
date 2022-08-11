@@ -1,13 +1,12 @@
 library social_embed_webview;
 
 import 'package:flutter/material.dart';
-import 'package:social_embed_webview/platforms/social-media-generic.dart';
 import 'package:social_embed_webview/utils/common-utils.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SocialEmbed extends StatefulWidget {
-  final SocialMediaGenericEmbedData socialMediaObj;
+  final dynamic socialMediaObj;
   final Color? backgroundColor;
   const SocialEmbed(
       {Key? key, required this.socialMediaObj, this.backgroundColor})
