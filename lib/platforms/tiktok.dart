@@ -3,6 +3,7 @@ class TiktokEmbedData {
   final double bottomMargin;
   final bool canChangeSize;
   final String htmlScriptUrl;
+  final bool supportMediaController = false;
 
   TiktokEmbedData({
     required this.embedHtml,

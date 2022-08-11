@@ -5,6 +5,7 @@ class FacebookEmbedData {
   final String htmlScriptUrl;
   final String pauseVideoScript;
   final String stopVideoScript;
+  final bool supportMediaController = false;
 
   FacebookEmbedData({
     required this.embedHtml,

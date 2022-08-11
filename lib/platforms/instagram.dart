@@ -3,6 +3,7 @@ class InstagramEmbedData {
   final double bottomMargin;
   final bool canChangeSize;
   final String htmlScriptUrl;
+  final bool supportMediaController = false;
 
   InstagramEmbedData({
     required this.embedHtml,

@@ -3,6 +3,7 @@ class TwitterEmbedData {
   final double bottomMargin;
   final bool canChangeSize;
   final String htmlScriptUrl;
+  final bool supportMediaController = false;
 
   TwitterEmbedData({
     required this.embedHtml,

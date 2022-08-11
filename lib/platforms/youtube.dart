@@ -4,7 +4,7 @@ class YoutubeEmbedData extends SocialMediaGenericEmbedData {
   final String videoId;
 
   const YoutubeEmbedData({required this.videoId})
-      : super(supportMediaControll: true, aspectRatio: 16 / 9);
+      : super(supportMediaController: true, aspectRatio: 16 / 9);
 
   @override
   String get htmlScriptUrl => 'https://www.youtube.com/iframe_api';

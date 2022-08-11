@@ -24,13 +24,13 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    if (widget.socialMediaObj.supportMediaControll)
+    if (widget.socialMediaObj.supportMediaController)
       WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    if (widget.socialMediaObj.supportMediaControll)
+    if (widget.socialMediaObj.supportMediaController)
       WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -63,11 +63,10 @@ class _SocialEmbedState extends State<SocialEmbed> with WidgetsBindingObserver {
         },
         onPageFinished: (str) {
           final color = colorToHtmlRGBA(getBackgroundColor(context));
-          wbController.runJavascript(
-              'document.body.style= "background-color: $color"');
+          wbController
+              .runJavascript('document.body.style= "background-color: $color"');
           if (widget.socialMediaObj.aspectRatio == null)
-            wbController
-                .runJavascript('setTimeout(() => sendHeight(), 0)');
+            wbController.runJavascript('setTimeout(() => sendHeight(), 0)');
         },
         navigationDelegate: (navigation) async {
           final url = navigation.url;

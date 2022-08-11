@@ -1,6 +1,6 @@
 abstract class SocialMediaGenericEmbedData {
   const SocialMediaGenericEmbedData({
-    this.supportMediaControll = false,
+    this.supportMediaController = false,
     this.canChangeSize = false,
     this.bottomMargin = 0,
     this.aspectRatio,
@@ -8,7 +8,7 @@ abstract class SocialMediaGenericEmbedData {
   // static final AssetsCache _assetsCache = AssetsCache();
   final double? aspectRatio;
   final bool canChangeSize;
-  final bool supportMediaControll;
+  final bool supportMediaController;
   final double bottomMargin;
   String get htmlBody;
   String get htmlScriptUrl;
