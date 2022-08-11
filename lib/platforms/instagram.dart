@@ -1,14 +1,15 @@
-import 'social-media-generic.dart';
-
-class InstagramEmbedData extends SocialMediaGenericEmbedData {
+class InstagramEmbedData {
   final String embedHtml;
+  final double bottomMargin;
+  final bool canChangeSize;
+  final String htmlScriptUrl;
 
-  const InstagramEmbedData({required this.embedHtml})
-      : super(bottomMargin: -10, canChangeSize: true);
+  InstagramEmbedData({
+    required this.embedHtml,
+    this.bottomMargin = -10,
+    this.canChangeSize = true,
+    this.htmlScriptUrl = "https://www.instagram.com/embed.js",
+  });
 
-  @override
-  String get htmlScriptUrl => 'https://www.instagram.com/embed.js';
-
-  @override
-  String get htmlBody => embedHtml + htmlScript;
+  String get htmlBody => embedHtml + htmlScriptUrl;
 }

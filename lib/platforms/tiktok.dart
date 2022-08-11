@@ -1,14 +1,15 @@
-import 'package:social_embed_webview/platforms/social-media-generic.dart';
-
-class TiktokEmbedData extends SocialMediaGenericEmbedData {
+class TiktokEmbedData {
   final String embedHtml;
+  final double bottomMargin;
+  final bool canChangeSize;
+  final String htmlScriptUrl;
 
-  const TiktokEmbedData({required this.embedHtml})
-      : super(canChangeSize: true, bottomMargin: -10);
+  TiktokEmbedData({
+    required this.embedHtml,
+    this.bottomMargin = -10,
+    this.canChangeSize = true,
+    this.htmlScriptUrl = "https://www.tiktok.com/embed.js",
+  });
 
-  @override
-  String get htmlScriptUrl => 'https://www.tiktok.com/embed.js';
-
-  @override
-  String get htmlBody => embedHtml + htmlScript;
+  String get htmlBody => embedHtml + htmlScriptUrl;
 }
