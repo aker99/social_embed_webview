@@ -47,6 +47,7 @@ Please make sure to remove `<script>...</script>` added by the platform with oth
 Please visit [examples](https://pub.dev/packages/social_embed_webview/example) for more detailed examples corresponding to each platform
 ```
 import 'package:flutter/material.dart';
+import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 
 /// <srcipts>...</scripts> tag has been removed
@@ -58,6 +59,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,7 @@ class MyApp extends StatelessWidget {
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Social Embed WebView Example'),
+            title: const Text('Social Embed WebView Example'),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -80,7 +83,6 @@ class MyApp extends StatelessWidget {
                   SocialEmbed(
                       socialMediaObj:
                           TwitterEmbedData(embedHtml: tweetContent)),
-                  )
                 ],
               ),
             ),
